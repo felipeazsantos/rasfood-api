@@ -6,9 +6,12 @@ import dev.felipeazsantos.api.rasfood.repository.projection.MenuItemProjection;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 public interface MenuItemService {
-    List<MenuItem> findAll();
+    Page<MenuItem> findAll(Pageable pageable);
     List<MenuItemProjection> findAllByCategory(Long categoryId);
     List<MenuItemDto> findAllByName(String name);
     MenuItem findById(Long id);
