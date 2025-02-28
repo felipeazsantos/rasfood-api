@@ -21,6 +21,11 @@ public class MenuItemServiceImpl implements MenuItemService {
     }
 
     @Override
+    public List<MenuItem> findAllByCategory(Long categoryId) {
+        return menuItemRepository.findAllByCategory(categoryId);
+    }
+
+    @Override
     public MenuItem findById(Long id) {
         return menuItemRepository.findById(id).orElseThrow(() -> new NotFoundException("MenuItem not founded"));
     }

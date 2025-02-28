@@ -32,6 +32,11 @@ public class MenuItemController {
         return ResponseEntity.ok(menuItemService.findById(id));
     }
 
+    @GetMapping("/category/{id}/available")
+    public ResponseEntity<List<MenuItem>> findAllByCategory(@PathVariable("id") Long categoryId) {
+        return ResponseEntity.ok(menuItemService.findAllByCategory(categoryId));
+    }
+
     @PostMapping
     public ResponseEntity<MenuItem> create(@RequestBody MenuItem menuItem) {
         if (Objects.nonNull(menuItem.getId())) {
