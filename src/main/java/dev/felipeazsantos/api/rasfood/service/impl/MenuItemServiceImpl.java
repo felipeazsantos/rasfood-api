@@ -1,5 +1,6 @@
 package dev.felipeazsantos.api.rasfood.service.impl;
 
+import dev.felipeazsantos.api.rasfood.dto.MenuItemDto;
 import dev.felipeazsantos.api.rasfood.entity.MenuItem;
 import dev.felipeazsantos.api.rasfood.exception.NotFoundException;
 import dev.felipeazsantos.api.rasfood.repository.MenuItemRepository;
@@ -23,6 +24,11 @@ public class MenuItemServiceImpl implements MenuItemService {
     @Override
     public List<MenuItem> findAllByCategory(Long categoryId) {
         return menuItemRepository.findAllByCategory(categoryId);
+    }
+
+    @Override
+    public List<MenuItemDto> findAllByName(String name) {
+        return menuItemRepository.findAllByName(name);
     }
 
     @Override

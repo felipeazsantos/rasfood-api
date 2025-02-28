@@ -2,6 +2,7 @@ package dev.felipeazsantos.api.rasfood.controller;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.felipeazsantos.api.rasfood.dto.MenuItemDto;
 import dev.felipeazsantos.api.rasfood.entity.MenuItem;
 import dev.felipeazsantos.api.rasfood.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class MenuItemController {
     @GetMapping("/category/{id}/available")
     public ResponseEntity<List<MenuItem>> findAllByCategory(@PathVariable("id") Long categoryId) {
         return ResponseEntity.ok(menuItemService.findAllByCategory(categoryId));
+    }
+
+    @GetMapping("/name/{name}/available")
+    public ResponseEntity<List<MenuItemDto>> findAllByCategory(@PathVariable("name") String name) {
+        return ResponseEntity.ok(menuItemService.findAllByName(name));
     }
 
     @PostMapping
