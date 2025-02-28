@@ -23,7 +23,6 @@ public class MenuItem {
     private Boolean available;
     private BigDecimal price;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 

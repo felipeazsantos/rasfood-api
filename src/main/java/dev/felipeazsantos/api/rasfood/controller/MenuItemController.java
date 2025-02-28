@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.felipeazsantos.api.rasfood.entity.MenuItem;
 import dev.felipeazsantos.api.rasfood.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/menu-item")
@@ -28,6 +30,14 @@ public class MenuItemController {
     @GetMapping("/{id}")
     public ResponseEntity<MenuItem> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(menuItemService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<MenuItem> create(@RequestBody MenuItem menuItem) {
+        if (Objects.nonNull(menuItem.getId())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(menuItemService.save(menuItem));
     }
 
     @PatchMapping("/{id}")

@@ -1,5 +1,7 @@
 package dev.felipeazsantos.api.rasfood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
 public class Customer {
 
     @Id

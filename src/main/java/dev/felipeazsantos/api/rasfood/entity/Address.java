@@ -1,6 +1,5 @@
 package dev.felipeazsantos.api.rasfood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
@@ -25,8 +24,7 @@ public class Address {
     private String complement;
 
     private String cep;
-    
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
