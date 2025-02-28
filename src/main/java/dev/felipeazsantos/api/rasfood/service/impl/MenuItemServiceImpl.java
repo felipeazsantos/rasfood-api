@@ -4,6 +4,7 @@ import dev.felipeazsantos.api.rasfood.dto.MenuItemDto;
 import dev.felipeazsantos.api.rasfood.entity.MenuItem;
 import dev.felipeazsantos.api.rasfood.exception.NotFoundException;
 import dev.felipeazsantos.api.rasfood.repository.MenuItemRepository;
+import dev.felipeazsantos.api.rasfood.repository.projection.MenuItemProjection;
 import dev.felipeazsantos.api.rasfood.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class MenuItemServiceImpl implements MenuItemService {
     }
 
     @Override
-    public List<MenuItem> findAllByCategory(Long categoryId) {
+    public List<MenuItemProjection> findAllByCategory(Long categoryId) {
         return menuItemRepository.findAllByCategory(categoryId);
     }
 
