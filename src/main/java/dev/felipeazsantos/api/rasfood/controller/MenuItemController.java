@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,13 @@ public class MenuItemController {
     private ObjectMapper objectMapper;
 
     @GetMapping
-    public ResponseEntity<Page<MenuItem>> findAll(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public ResponseEntity<Page<MenuItem>> findAll(@RequestParam("page") Integer page, @RequestParam("size") Integer size,
+                                                  @RequestParam(value = "sort", required = false) Sort.Direction sort,
+                                                  @RequestParam(value = "property", required = false) String property) {
+        Pageable pageable = Objects.nonNull(sort)
+                ? PageRequest.of(page, size, Sort.by(sort, property))
+                : PageRequest.of(page, size);
+
         return ResponseEntity.ok(menuItemService.findAll(pageable));
     }
 
