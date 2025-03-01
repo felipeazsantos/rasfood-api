@@ -6,13 +6,14 @@ import dev.felipeazsantos.api.rasfood.repository.projection.MenuItemProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
+public interface MenuItemRepository extends JpaRepository<MenuItem, Long>, JpaSpecificationExecutor<MenuItem> {
 
     @Query("SELECT new dev.felipeazsantos.api.rasfood.dto.MenuItemDto(mi.name, mi.description, mi.category.name, mi.price) FROM MenuItem mi " +
             " WHERE mi.name LIKE %:name% AND mi.available = true")

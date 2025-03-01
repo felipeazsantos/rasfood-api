@@ -8,6 +8,7 @@ import dev.felipeazsantos.api.rasfood.repository.projection.MenuItemProjection;
 import dev.felipeazsantos.api.rasfood.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,11 @@ public class MenuItemServiceImpl implements MenuItemService {
 
     @Autowired
     private MenuItemRepository menuItemRepository;
+
+    @Override
+    public Page<MenuItem> findAll(Specification<MenuItem> specification, Pageable pageable) {
+        return menuItemRepository.findAll(specification, pageable);
+    }
 
     @Override
     public Page<MenuItem> findAll(Pageable pageable) {

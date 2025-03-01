@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.felipeazsantos.api.rasfood.dto.MenuItemDto;
 import dev.felipeazsantos.api.rasfood.entity.MenuItem;
 import dev.felipeazsantos.api.rasfood.repository.projection.MenuItemProjection;
+import dev.felipeazsantos.api.rasfood.repository.specification.MenuItemSpec;
 import dev.felipeazsantos.api.rasfood.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,9 +53,12 @@ public class MenuItemController {
     }
 
     @GetMapping("/name/{name}/available")
-    public ResponseEntity<Page<MenuItemDto>> findAllByName(@PathVariable("name") String name, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+    public ResponseEntity<List<MenuItem>> findAllByName(@PathVariable("name") String name, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(menuItemService.findAllByName(name, pageable));
+        return ResponseEntity.ok(menuItemService.findAll(Specification
+                        .where(MenuItemSpec.name(name))
+                        .and(MenuItemSpec.available(true)),
+                pageable).getContent());
     }
 
     @PostMapping
