@@ -25,13 +25,13 @@ public class MenuItemServiceImpl implements MenuItemService {
     }
 
     @Override
-    public List<MenuItemProjection> findAllByCategory(Long categoryId) {
-        return menuItemRepository.findAllByCategory(categoryId);
+    public Page<MenuItemProjection> findAllByCategory(Long categoryId, Pageable pageable) {
+        return menuItemRepository.findAllByCategory(categoryId, pageable);
     }
 
     @Override
-    public List<MenuItemDto> findAllByName(String name) {
-        return menuItemRepository.findAllByName(name);
+    public Page<MenuItemDto> findAllByName(String name, Pageable pageable) {
+        return menuItemRepository.findAllByName(name, pageable);
     }
 
     @Override

@@ -39,13 +39,15 @@ public class MenuItemController {
     }
 
     @GetMapping("/category/{id}/available")
-    public ResponseEntity<List<MenuItemProjection>> findAllByCategory(@PathVariable("id") Long categoryId) {
-        return ResponseEntity.ok(menuItemService.findAllByCategory(categoryId));
+    public ResponseEntity<Page<MenuItemProjection>> findAllByCategory(@PathVariable("id") Long categoryId, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(menuItemService.findAllByCategory(categoryId, pageable));
     }
 
     @GetMapping("/name/{name}/available")
-    public ResponseEntity<List<MenuItemDto>> findAllByName(@PathVariable("name") String name) {
-        return ResponseEntity.ok(menuItemService.findAllByName(name));
+    public ResponseEntity<Page<MenuItemDto>> findAllByName(@PathVariable("name") String name, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(menuItemService.findAllByName(name, pageable));
     }
 
     @PostMapping
